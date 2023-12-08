@@ -1,39 +1,59 @@
+// TypeScript practice: classes, getters/setters, constructor, inheritance, access modifiers
+
 export class Employee {
     #id: number;
-    protected firstName: string;
-    protected lastName: string;
-    address: string;
+    protected employeeFirstName: string;
+    protected employeeLastName: string;
+    EmployeeAddress: string;
 
-    constructor(id: number, protected firstName: string, protected lastName: string, address: string) {
+    static getEmployeeCount(): number {
+        return 50;
+    }
+
+    constructor(id: number, protected EmployeeFirstName: string, protected EmployeeLastName: string, EmployeeAddress: string) {
         this.#id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
+        this.employeeFirstName = EmployeeFirstName;
+        this.employeeLastName = EmployeeLastName;
+        this.EmployeeAddress = EmployeeAddress;
+    }
+
+    get empId(): number {
+    return this.#id;
+    }
+
+    set empId(id: number) {
+        this.#id = id;
     }
 
     getEmployeeNameAndAddress(): string {
-        return `Name: ${this.firstName} ${this.lastName}\nAddress: ${this.address}`;
+        return `Name: ${this.employeeFirstName} ${this.employeeLastName}\nAddress: ${this.EmployeeAddress}`;
     }
 }
 
-let GerkoWubs = new Employee(1, "Gerko", "Wubs", "Kamperfoeliestraat 3");
-//GerkoWubs.id = 2;                 // private
-GerkoWubs.address = "Hooibaal 2"    // protected
+let gerkoWubs = new Employee(1, "Gerko", "Wubs", "Kamperfoeliestraat 3");
+
+gerkoWubs.empId = 100;
+console.log(gerkoWubs.empId);
+
+//gerkoWubs.id = 2;                 // private
+gerkoWubs.EmployeeAddress = "Hooibaal 2"    // protected
+// Employee.getEmployeeCount()      // static -> call on name without creating new instance
+
 
 class Manager extends Employee {
     constructor(id: number, firstName: string, lastName: string, address: string) {
         super(id, firstName, lastName, address);
     }
     getManagerNameAndAddress(): string {
-        return `Name[M]: ${this.firstName} ${this.lastName}\nAddress: ${this.address}`;
+        return `Name[M]: ${this.employeeFirstName} ${this.employeeLastName}\nAddress: ${this.EmployeeAddress}`;
     }
 }
 
-let BarcellaSmilde = new Manager(1, "Barcella", "Smilde", "Anjerstraat 7");
+let marcellaSmilde = new Manager(1, "Marcella", "Smilde", "Anjerstraat 7");
 
 
-let EmployeeNameAndAddress = GerkoWubs.getEmployeeNameAndAddress()
+let EmployeeNameAndAddress = gerkoWubs.getEmployeeNameAndAddress()
 console.log(EmployeeNameAndAddress);
 
-let ManagerNameAndAddress = BarcellaSmilde.getManagerNameAndAddress()
+let ManagerNameAndAddress = marcellaSmilde.getManagerNameAndAddress()
 console.log(ManagerNameAndAddress);
