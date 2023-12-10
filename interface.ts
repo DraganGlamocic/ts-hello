@@ -57,3 +57,12 @@ console.log(result);
 // real-world entities or concepts. They provide the implementation for the properties
 // and methods defined in interfaces, which allows you to create objects with specific behavior.
 
+@Component({})
+class Component {
+    constructor(public name: string) {
+    }
+}
+
+
+
+
